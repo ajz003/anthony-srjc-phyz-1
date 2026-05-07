@@ -1,0 +1,169 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+type ResourceLink = {
+  title: string;
+  url: string;
+  note?: string;
+};
+
+type SectionGroup = {
+  title: string;
+  description?: string;
+  links: ResourceLink[];
+};
+
+const siteTitle = "Physiology 1";
+const pageTitle =
+  "Colette Bizal PHYZ 1 Study Guides | SRJC Physiology 1 Lecture Exam 4";
+const pageDescription =
+  "Download temporary SRJC PHYZ 1 Physiology 1 study guides, worksheets, and files for Colette Bizal's Lecture Exam 4 while Canvas access is unavailable.";
+const pageHeading = "Colette Bizal PHYZ 1 Lecture Exam 4 Study Guides";
+const tutorName = "Anthony";
+
+const groups: SectionGroup[] = [
+  {
+    title: "Download Colette Bizal's PHYZ 1 Study Guide Files",
+    description:
+      "Temporary downloads for SRJC Physiology 1 students looking for Colette Bizal's PHYZ 1 Lecture Exam 4 study guides, worksheets, and review files while Canvas access is unavailable.",
+    links: [
+      {
+        title: "Download Digestion Study Guide - L15",
+        url: "/downloads/P1SG L15 Digestive.pdf",
+        note: "Colette Bizal PHYZ 1 Lecture Exam 4 file covering Digestion lecture material.",
+      },
+      {
+        title: "Download Metabolism Study Guide - L16",
+        url: "/downloads/P1SG L16 Metabolism.pdf",
+        note: "Colette Bizal PHYZ 1 Lecture Exam 4 file covering Metabolism lecture material.",
+      },
+      {
+        title: "Download Blood Study Guide - L17",
+        url: "/downloads/P1SG L17 Blood.pdf",
+        note: "Colette Bizal PHYZ 1 Lecture Exam 4 file covering Blood lecture material.",
+      },
+      {
+        title: "Download Immune System Study Guide - L18",
+        url: "/downloads/P1SG L18 Immune.pdf",
+        note: "Colette Bizal PHYZ 1 Lecture Exam 4 file covering Immune System lecture material.",
+      },
+      {
+        title: "Download Reproduction Study Guide - L19",
+        url: "/downloads/P1SG L19 Reproduction.pdf",
+        note: "Colette Bizal PHYZ 1 Lecture Exam 4 file covering Female and Male Reproduction lecture material.",
+      },
+    ],
+  },
+  {
+    title: "What is covered on PHYZ 1 Lecture Exam 4?",
+    description:
+      "According to the SRJC PHYZ 1 syllabus, Lecture Exam 4 covers Digestion L15, Metabolism L16, Blood L17, Immune L18, and Reproduction L19.",
+    links: [],
+  },
+];
+---
+
+<SiteLayout
+  title={pageTitle}
+  siteTitle={siteTitle}
+  description={pageDescription}
+  keywords="Colette Bizal, Bizal, Colette, SRJC, Santa Rosa Junior College, PHYZ 1, Physiology 1, Human Physiology, study guides, study guide, worksheets, worksheet, files, download, Lecture Exam 4, Exam 4, digestion, metabolism, blood, immune, reproduction"
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  noindex={false}
+>
+  <main class="bg-white px-4 py-6 md:px-10 md:py-8">
+    <div class="mb-1.5 text-[0.9rem] text-neutral-500">
+      SRJC {siteTitle} / PHYZ 1
+    </div>
+
+    <h1 class="mb-5 text-[2rem] font-normal leading-tight text-neutral-800">
+      {pageHeading}
+    </h1>
+
+    <div
+      class="mb-8 rounded-lg border border-amber-200 bg-amber-50 px-4 py-4 text-neutral-800"
+    >
+      <p class="mb-2 font-medium">
+        Temporary SRJC PHYZ 1 study guide download page
+      </p>
+
+      <p class="mb-2">
+        Canvas access is currently unavailable, so this page is here to help
+        SRJC PHYZ 1 students find and download Colette Bizal's Physiology 1
+        Lecture Exam 4 study guides, worksheets, and class files.
+      </p>
+
+      <p class="text-sm text-neutral-600">
+        This is a temporary backup resource for students in Colette Bizal's SRJC
+        Physiology 1 class. Please use the official Canvas materials again once
+        Canvas access is restored.
+      </p>
+    </div>
+
+    <section class="mb-8">
+      <h2 class="mb-2 text-[1.2rem] font-semibold text-neutral-800">
+        SRJC PHYZ 1 Lecture Exam 4 Topics
+      </h2>
+
+      <p class="text-base text-neutral-600">
+        These files are for Lecture Exam 4 in Colette Bizal's SRJC PHYZ 1 Human
+        Physiology course. The exam topics include Digestion, Metabolism, Blood,
+        Immune System, and Reproduction.
+      </p>
+    </section>
+
+    {
+      groups.map((group) => (
+        <section
+          class="mt-8"
+          aria-labelledby={group.title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")}
+        >
+          <h2
+            id={group.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
+            class="mb-2 text-[1.2rem] font-semibold text-neutral-800"
+          >
+            {group.title}
+          </h2>
+
+          {group.description && (
+            <p class="mb-3.5 text-base text-neutral-500">{group.description}</p>
+          )}
+
+          {group.links.length > 0 && (
+            <ul class="m-0 list-disc pl-[1.35rem]">
+              {group.links.map((link) => (
+                <li class="my-2">
+                  <a
+                    href={link.url}
+                    download
+                    class="text-blue-700 underline-offset-2 hover:underline"
+                  >
+                    {link.title}
+                  </a>
+
+                  {link.note && (
+                    <div class="mt-0.5 text-[0.94rem] text-neutral-500">
+                      {link.note}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))
+    }
+
+    <section
+      class="mt-10 border-t border-neutral-200 pt-6 text-sm text-neutral-500"
+    >
+      <p>
+        Maintained by {tutorName} as a temporary PHYZ 1 student resource for SRJC
+        classmates while Canvas access is unavailable.
+      </p>
+    </section>
+  </main>
+</SiteLayout>

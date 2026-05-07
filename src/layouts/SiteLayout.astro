@@ -1,13 +1,39 @@
 ---
 import "../styles/global.css";
-const title =
-  "Anthony's ANAT 1 | SRJC Anatomy 1 Study Help, Review Sessions, and Resources";
-const description =
-  "Anthony's ANAT 1 for SRJC students. Find Anatomy 1 study resources, tutoring support, review sessions, practice materials, lab exam prep, and helpful links for succeeding in ANAT 1.";
-const canonical = "https://your-domain.com/";
-const ogImage = "https://your-domain.com/og-image.jpg";
 
-const siteTitle = "Anatomy 1";
+type Props = {
+  title?: string;
+  siteTitle?: string;
+  description?: string;
+  keywords?: string;
+  canonical?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogSiteName?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+  noindex?: boolean;
+};
+
+const {
+  title = "Anthony's PHYZ 1 | SRJC Physiology Study Help, Review Sessions, and Resources",
+  siteTitle = "Physiology 1",
+  description = "Anthony's PHYZ 1 for SRJC students. Find Physiology study resources, tutoring support, review sessions, practice materials, lab exam prep, and helpful links for succeeding in PHYZ 1.",
+  keywords = "Anthony PHYZ 1, SRJC Physiology 1, Santa Rosa Junior College physiology tutoring, PHYZ 1 tutor, physiology study help, physiology lab exam prep, physiology review sessions",
+  canonical,
+  ogTitle = title,
+  ogDescription = description,
+  ogSiteName = "Anthony's PHYZ 1",
+  ogImage,
+  ogImageAlt = "Anthony's PHYZ 1 website for SRJC students",
+  twitterTitle = ogTitle,
+  twitterDescription = ogDescription,
+  twitterImage = ogImage,
+  noindex = false,
+} = Astro.props;
 
 type NavItem = {
   label: string;
@@ -17,31 +43,68 @@ type NavItem = {
 
 const navItems: NavItem[] = [
   { label: "Welcome", href: "/" },
-  { label: "Intro & Cells (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Tissues (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Integumentary System (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Skeletal System (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Muscular System (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Coelom and Viscera (Coming Soon!)", comingSoon: true, href: "#" },
+
+  // Temporary student access page
   {
-    label: "Cardiovascular System (Coming Soon!)",
+    label: "Colette Bizal PHYZ 1 Study Guides",
+    href: "/srjc-phyz-1-colette-bizal-study-guides",
+  },
+
+  // Exam 1 Lecture Topics
+  { label: "L1: Introduction (Coming Soon!)", comingSoon: true, href: "#" },
+  {
+    label: "L2: Chemistry & Proteins (Coming Soon!)",
     comingSoon: true,
     href: "#",
   },
-  { label: "Lymphatic System (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Nervous System", href: "/nervous-system" },
-  { label: "Special Senses (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Digestive System (NEW!)", href: "/digestive-system" },
-  { label: "Respiratory System (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Urinary System (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Reproductive System (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Endocrine System (Coming Soon!)", comingSoon: true, href: "#" },
-  { label: "Anki Decks (NEW!)", href: "/anki-decks" },
+  {
+    label: "L3: Cells & Metabolism (Coming Soon!)",
+    comingSoon: true,
+    href: "#",
+  },
+  { label: "L4: Enzymes (Coming Soon!)", comingSoon: true, href: "#" },
+  { label: "L5: Membranes (Coming Soon!)", comingSoon: true, href: "#" },
+
+  // Exam 2 Lecture Topics
+  { label: "L6: Nervous System (Coming Soon!)", comingSoon: true, href: "#" },
+  { label: "L7: CNS (Coming Soon!)", comingSoon: true, href: "#" },
+  {
+    label: "L8: PNS: Sensory & Senses (Coming Soon!)",
+    comingSoon: true,
+    href: "#",
+  },
+  { label: "L9: PNS: Motor / ANS (Coming Soon!)", comingSoon: true, href: "#" },
+  { label: "L10: Muscle (Coming Soon!)", comingSoon: true, href: "#" },
+  { label: "L11: Endocrine (Coming Soon!)", comingSoon: true, href: "#" },
+
+  // Exam 3 Lecture Topics
+  {
+    label: "L12: Cardiovascular System (Coming Soon!)",
+    comingSoon: true,
+    href: "#",
+  },
+  {
+    label: "L13: Respiratory System (Coming Soon!)",
+    comingSoon: true,
+    href: "#",
+  },
+  { label: "L14: Urinary System (Coming Soon!)", comingSoon: true, href: "#" },
+
+  // Exam 4 Lecture Topics
+  { label: "L15: Digestion (Coming Soon!)", comingSoon: true, href: "#" },
+  { label: "L16: Metabolism (Coming Soon!)", comingSoon: true, href: "#" },
+  { label: "L17: Blood (Coming Soon!)", comingSoon: true, href: "#" },
+  { label: "L18: Immune System (Coming Soon!)", comingSoon: true, href: "#" },
+  { label: "L19: Reproduction (Coming Soon!)", comingSoon: true, href: "#" },
+
+  // Extra Resources
+  { label: "Lab Exam Resources (Coming Soon!)", comingSoon: true, href: "#" },
+  { label: "Anki Decks (Coming Soon!)", comingSoon: true, href: "#" },
 ];
 
 const { pathname } = Astro.url;
 const isActive = (href: string) =>
-  pathname === href || pathname.startsWith(`${href}/`);
+  href !== "#" && (pathname === href || pathname.startsWith(`${href}/`));
 
 const menuId = "mobile-nav";
 const buttonId = "mobile-nav-button";
@@ -51,44 +114,41 @@ const buttonId = "mobile-nav-button";
 <html lang="en" class="h-full scroll-smooth bg-stone-100">
   <head>
     <title>{title}</title>
+
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
     <meta
-      name="keywords"
-      content="Anthony ANAT 1, SRJC Anatomy 1, Santa Rosa Junior College anatomy tutoring, ANAT 1 tutor, anatomy study help, anatomy lab exam prep, anatomy review sessions"
+      name="robots"
+      content={noindex ? "noindex, nofollow" : "index, follow"}
     />
-    <meta name="robots" content="index, follow" />
     <meta name="author" content="Anthony" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- <link rel="canonical" href={canonical} /> -->
+
+    {canonical && <link rel="canonical" href={canonical} />}
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Anthony's ANAT 1" />
-    <meta
-      property="og:description"
-      content="SRJC Anatomy 1 tutoring, study resources, review sessions, lab exam prep, and helpful ANAT 1 links."
-    />
-    <!-- <meta property="og:url" content={canonical} /> -->
-    <meta property="og:site_name" content="Anthony's ANAT 1" />
-    <!-- <meta property="og:image" content={ogImage} /> -->
-    <meta
-      property="og:image:alt"
-      content="Anthony's ANAT 1 website for SRJC students"
-    />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:site_name" content={ogSiteName} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image:alt" content={ogImageAlt} />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Anthony's ANAT 1" />
     <meta
-      name="twitter:description"
-      content="SRJC Anatomy 1 tutoring, review sessions, study help, and ANAT 1 resources."
+      name="twitter:card"
+      content={twitterImage ? "summary_large_image" : "summary"}
     />
-    <!-- <meta name="twitter:image" content={ogImage} /> -->
+    <meta name="twitter:title" content={twitterTitle} />
+    <meta name="twitter:description" content={twitterDescription} />
+    {twitterImage && <meta name="twitter:image" content={twitterImage} />}
   </head>
+
   <body class="min-h-full font-sans text-neutral-800 antialiased">
     <header class="border-b border-neutral-300 bg-white px-5 py-4">
       <div
         class="mx-auto flex w-full max-w-340 flex-col gap-4 md:flex-row md:items-center md:justify-between"
       >
-        <div class="text-lg font-medium text-neutral-800">Anthony's ANAT 1</div>
+        <div class="text-lg font-medium text-neutral-800">Anthony's PHYZ 1</div>
         <!-- 
         <div class="w-full md:max-w-90">
           <input
@@ -170,27 +230,24 @@ const buttonId = "mobile-nav-button";
           </ul>
         </nav>
       </aside>
+
       <slot />
     </div>
+
     <footer class="border-t border-neutral-300 bg-white px-5 py-6">
       <div
         class="mx-auto flex w-full max-w-340 flex-col gap-2 text-sm text-neutral-600"
       >
-        <p class="font-medium text-neutral-800">Anthony's ANAT 1</p>
-        <p>Built as a study resource hub for SRJC Anatomy 1 students.</p>
+        <p class="font-medium text-neutral-800">Anthony's PHYZ 1</p>
+        <p>Built as a study resource hub for SRJC Physiology students.</p>
         <p>
-          This website was inspired by
-          <a
-            href="https://sites.google.com/view/srjcanatomy1/welcome?authuser=0"
-            target="_blank"
-            rel="noreferrer"
-            class="text-blue-700 underline underline-offset-2 hover:text-blue-800"
-          >
-            Danielle King's Anatomy 1 website
-          </a>.
+          This website is designed to help PHYZ 1 students review lecture
+          concepts, prepare for lab exams, and practice physiology questions
+          more actively.
         </p>
       </div>
     </footer>
+
     <script>
       const button = document.getElementById("mobile-nav-button");
       const menu = document.getElementById("mobile-nav");
@@ -203,6 +260,7 @@ const buttonId = "mobile-nav-button";
         });
       }
     </script>
+
     <script
       data-goatcounter="https://anthony.goatcounter.com/count"
       async
